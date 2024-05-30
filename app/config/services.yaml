@@ -1,0 +1,8 @@
+imports:
+  - { resource: services/3rd-party.yaml }
+  - { resource: services/application.yaml }
+  - { resource: services/domain.yaml }
+  - { resource: services/infrastructure.yaml }
+  - { resource: services/user_interface.yaml }
+
+parameters:

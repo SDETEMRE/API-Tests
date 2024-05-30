@@ -1,0 +1,22 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\LogAnalyticsService\UserInterface\Http\Controller\:
+    resource: '../../src/LogAnalyticsService/UserInterface/Http/Controller'
+
+  App\LogAnalyticsService\UserInterface\Http\Controller\V1\OpenApiController:
+    arguments:
+      $openApiFilePath: '%kernel.project_dir%/config/openapi/openapi.yaml'
+
+  App\LogAnalyticsService\UserInterface\CLI\Command\StoreLogsInDatabaseCommand:
+    arguments:
+      $logFilePath: '%kernel.project_dir%/logs/logs.log'
+
+when@test:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+

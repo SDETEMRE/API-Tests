@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\LogAnalyticsService\Domain\Service\Repository\ServiceLogRepositoryInterface: '@App\LogAnalyticsService\Infrastructure\Repository\DoctrineDbalServiceLogRepository'
+  App\LogAnalyticsService\Domain\Service\Repository\ServiceLogImporterInterface: '@App\LogAnalyticsService\Infrastructure\ServiceLogImporter'
+
+when@test:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+
+    App\LogAnalyticsService\Domain\Service\Repository\ServiceLogRepositoryInterface: '@App\Tests\Mock\Infrastructure\Repository\ServiceLogRepositorySpy'
+
+when@behat:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true

@@ -1,0 +1,47 @@
+doctrine:
+  dbal:
+    default_connection: write
+    connections:
+      write:
+        dbname: '%env(MYSQL_DATABASE)%'
+        host: '%env(MYSQL_HOST)%'
+        port: '%env(MYSQL_PORT)%'
+        user: '%env(MYSQL_USER)%'
+        password: '%env(MYSQL_PASSWORD)%'
+        driver: pdo_mysql
+      migrations:
+        dbname: '%env(MYSQL_DATABASE)%'
+        host: '%env(MYSQL_HOST)%'
+        port: '%env(MYSQL_PORT)%'
+        user: '%env(MYSQL_MIGRATIONS_USERNAME)%'
+        password: '%env(MYSQL_MIGRATIONS_PASSWORD)%'
+        driver: pdo_mysql
+
+when@test:
+  doctrine:
+    dbal:
+      default_connection: write
+      connections:
+        write:
+          dbname: '%env(MYSQL_DATABASE)%'
+          host: '%env(MYSQL_HOST)%'
+          port: '%env(MYSQL_PORT)%'
+          user: '%env(MYSQL_USER)%'
+          password: '%env(MYSQL_PASSWORD)%'
+          driver: pdo_mysql
+        migrations:
+          dbname: '%env(MYSQL_DATABASE)%'
+          host: '%env(MYSQL_HOST)%'
+          port: '%env(MYSQL_PORT)%'
+          user: '%env(MYSQL_MIGRATIONS_USERNAME)%'
+          password: '%env(MYSQL_MIGRATIONS_PASSWORD)%'
+          driver: pdo_mysql
+
+when@prod:
+  framework:
+    cache:
+      pools:
+        doctrine.result_cache_pool:
+          adapter: cache.app
+        doctrine.system_cache_pool:
+          adapter: cache.system

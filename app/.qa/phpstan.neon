@@ -1,0 +1,8 @@
+parameters:
+	level: 7
+	checkMissingIterableValueType: false
+	paths:
+	- ../src
+	scanDirectories:
+	- ../src
+	excludePaths:

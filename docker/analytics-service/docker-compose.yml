@@ -1,0 +1,64 @@
+services:
+  php:
+    build:
+      context: php
+      dockerfile: Dockerfile_dev
+    volumes:
+      - ../../app:/app
+      - ./php/conf.d/xdebug.conf:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks:
+      - analytics_service
+    environment:
+      COMPOSER_MEMORY_LIMIT: -1
+      COMPOSER_HOME: /tmp
+      PHP_IDE_CONFIG: serverName=analytics-service
+      XDEBUG_CONFIG: "remote_enable=1 start_with_request=yes"
+
+  nginx:
+    build:
+      context: nginx
+      dockerfile: Dockerfile_dev
+    volumes:
+      - ../../app:/app
+    ports:
+      - "8090:80"
+    networks:
+      analytics_service:
+
+  logs_mysql:
+    image: mysql:8.0.31-oracle
+    ports:
+      - "33090:3306"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      MYSQL_USER: "analytics-service"
+      MYSQL_PASSWORD: "analytics-service"
+      MYSQL_DATABASE: "analytics-service"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "true"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    networks:
+      - analytics_service
+
+  logs_mysql_test:
+    image: mysql:8.0.31-oracle
+    ports:
+      - "33091:3306"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      MYSQL_USER: "analytics-service"
+      MYSQL_PASSWORD: "analytics-service"
+      MYSQL_DATABASE: "analytics-service-test"
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    networks:
+      - analytics_service
+
+volumes:
+  mysqldata:
+
+networks:
+  analytics_service:

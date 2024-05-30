@@ -1,0 +1,17 @@
+default:
+  suites:
+    default:
+      contexts:
+        - App\Tests\Behat\Context\FeatureContext
+
+  extensions:
+    Imbo\BehatApiExtension:
+      apiClient:
+        base_uri: http://nginx:80
+        debug: true
+        timeout: 20.0
+        verify: false
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: tests/Behat/bootstrap.php
+      kernel:
+        environment: behat

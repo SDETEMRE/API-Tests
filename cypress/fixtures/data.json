@@ -1,0 +1,57 @@
+{
+    "user_service_count": {
+        "serviceNames[]": ["USER-SERVICE"]
+    },
+    "user_service_count_value": 13,
+
+    "user_service_count_201": {
+        "serviceNames[]": ["USER-SERVICE"],
+        "statusCode": 201
+    },
+    "user_service_count_201_value": 10,
+
+    "user_service_count_400": {
+        "serviceNames[]": ["USER-SERVICE"],
+        "statusCode": 400
+    },
+    "user_service_count_400_value": 3,
+
+    "invoice_service_count": {
+        "serviceNames[]": ["INVOICE-SERVICE"]
+    },
+    "invoice_service_count_value": 6,
+
+    "invoice_service_count_201": {
+        "serviceNames[]": ["INVOICE-SERVICE"],
+        "statusCode": 201
+    },
+    "invoice_service_count_201_value": 5,
+
+    "invoice_service_count_400": {
+        "serviceNames[]": ["INVOICE-SERVICE"],
+        "statusCode": 400
+    },
+    "invoice_service_count_400_value": 1,
+
+    "user_service_count_date": {
+        "serviceNames[]": ["USER-SERVICE"],
+        "startDate": "2018-08-17T00:00:00Z",
+        "endDate": "2018-08-18T00:00:00Z"
+    },
+    "user_service_count_date_value": 9,
+
+    "invoice_service_count_date": {
+        "serviceNames[]": ["INVOICE-SERVICE"],
+        "startDate": "2018-08-17T00:00:00Z",
+        "endDate": "2018-08-18T00:00:00Z",
+        "statusCode": 201
+    },
+    "invoice_service_count_date_value": 4,
+
+    "no_user_service_name": {
+        "serviceNames[]": null
+    },
+    "no_invoice_service_name": {
+        "serviceNames[]": null
+    }
+}

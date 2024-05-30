@@ -1,0 +1,16 @@
+deptrac:
+  paths:
+    - ../src
+  layers:
+    - name: LogAnalyticsService
+      collectors:
+        - type: className
+          regex: App\\LogAnalyticsService\\Application\\.*
+        - type: className
+          regex: App\\LogAnalyticsService\\Domain\\.*
+        - type: className
+          regex: App\\LogAnalyticsService\\Infrastructure\\.*
+        - type: className
+          regex: App\\LogAnalyticsService\\UserInterface\\.*
+  ruleset:
+    LogAnalyticsService: ~

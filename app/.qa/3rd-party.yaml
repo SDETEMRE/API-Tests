@@ -1,0 +1,103 @@
+deptrac:
+  paths:
+    - ../src
+  layers:
+    - name: Application
+      collectors:
+        - type: className
+          regex: App\\LogAnalyticsService\\Application\\.*
+    - name: Domain
+      collectors:
+        - type: className
+          regex: App\\LogAnalyticsService\\Domain\\.*
+    - name: Infrastructure
+      collectors:
+        - type: className
+          regex: App\\LogAnalyticsService\\Infrastructure\\.*
+    - name: UserInterface
+      collectors:
+        - type: className
+          regex: App\\LogAnalyticsService\\UserInterface\\.*
+
+  # 3rd party libraries
+    - name: Psr Logger
+      collectors:
+        - type: className
+          regex: Psr\\Log\\.*
+        - type: className
+          regex: Psr\\Cache\\InvalidArgumentException
+    - name: Psr Cache
+      collectors:
+        - type: className
+          regex: Psr\\Cache\\.*
+    - name: Webmozart Assert
+      collectors:
+        - type: className
+          regex: Webmozart\\Assert\\.*
+    - name: GuzzleHttp
+      collectors:
+        - type: className
+          regex: GuzzleHttp\\.*
+        - type: className
+          regex: Psr\\Http\\.*
+    - name: Symfony Console
+      collectors:
+        - type: className
+          regex: Symfony\\Component\\Console\\.*
+
+  # symfony components
+    - name: Symfony Http Kernel
+      collectors:
+        - type: className
+          regex: Symfony\\Component\\HttpKernel\\.*
+    - name: Symfony Router
+      collectors:
+        - type: className
+          regex: Symfony\\Component\\Routing\\.*
+    - name: Symfony Http Foundation
+      collectors:
+        - type: className
+          regex: Symfony\\Component\\HttpFoundation\\.*
+    - name: Symfony Framework Bundle
+      collectors:
+        - type: className
+          regex: Symfony\\Bundle\\FrameworkBundle\\.*
+    - name: Symfony Http Client
+      collectors:
+        - type: className
+          regex: Symfony\\Contracts\\HttpClient\\.*
+        - type: className
+          regex: Symfony\\Component\\HttpClient\\.*
+    - name: Symfony Security
+      collectors:
+        - type: className
+          regex: Symfony\\Component\\Security\\.*
+    - name: Doctrine Dbal
+      collectors:
+        - type: className
+          regex: Doctrine\\DBAL\\.*
+
+  ruleset:
+    Domain:
+      - Psr Logger
+      - Webmozart Assert
+    Application:
+      - Domain
+      - Psr Logger
+    Infrastructure:
+      - Domain
+      - Psr Logger
+      - Symfony Http Client
+      - GuzzleHttp
+      - Psr Cache
+      - Doctrine Dbal
+    UserInterface:
+      - Application
+      - Domain
+      - Psr Logger
+      - Symfony Router
+      - Symfony Http Foundation
+      - Symfony Framework Bundle
+      - Symfony Http Kernel
+      - Symfony Security
+      - Symfony Console

@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: Log Analytics API
+  description: Log stream analysis API
+  contact:
+    email: marko.schilde@legal.one
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://127.0.0.1:8090
+    description: SwaggerHub API Auto Mocking
+tags:
+  - name: Analytics
+    description: Analytics functions
+paths:
+  /count:
+    get:
+      tags:
+        - Analytics
+      summary: Searches logs and provides aggregated count of matches
+      description: |
+        Count all matching items in the logs.
+      operationId: searchLogs
+      parameters:
+        - name: serviceNames[]
+          in: query
+          description: Array of service names
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          example: USER-SERVICE, INVOICE-SERVICE
+        - name: startDate
+          in: query
+          description: Start date in ATOM format (Y-m-d\TH:i:sP) or any other valid DateTime Format
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          description: End date in ATOM format (Y-m-d\TH:i:sP) or any other valid DateTime Format
+          required: false
+          schema:
+            type: string
+            format: date-time
+        - name: statusCode
+          in: query
+          description: Filter on request status code
+          example: Any valid HTTP Status Codes
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Count of matching results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountItem'
+        "400":
+          description: Bad input parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrieveAggregatedCount400Error'
+  /truncate:
+    delete:
+      tags:
+        - Analytics
+      summary: Truncates the service logs table
+      description: |
+        Removes all the records of logs
+      operationId: truncateLogs
+      responses:
+        "204":
+          description: Truncate was successful
+        "400":
+          description: Bad input parameter
+
+components:
+  schemas:
+    CountItem:
+      required:
+        - counter
+      type: object
+      properties:
+        counter:
+          minimum: 0
+          type: integer
+
+    RetrieveAggregatedCount400Error:
+      required:
+        - counter
+      type: object
+      properties:
+        type:
+          type: string
+          example: "/log-analytics-service/errors/retrieve_aggregated_log/bad-request"
+        title:
+          type: string
+          example: "Invalid request content."
+

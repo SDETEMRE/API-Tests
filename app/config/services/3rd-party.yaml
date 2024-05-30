@@ -1,0 +1,21 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+
+when@test:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+
+    App\Tests\Behat\Context\:
+      resource: '../../tests/Behat/Context'
+
+when@dev:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+
